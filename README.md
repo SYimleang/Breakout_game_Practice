@@ -5,4 +5,6 @@ Breakout game practice with C#
 
 Breakout is a classic arcade game where the player controls a paddle at the bottom of the screen to bounce a ball upwards, breaking bricks along the way. The goal is to clear all the bricks from the screen by hitting them with the ball.
 
-![Breakout Game Screenshot](gamePlay.png)
+<p align="center">
+  <img height='180px' src="gamePlay.png" alt="Breakout Game Screenshot" />
+</p>
