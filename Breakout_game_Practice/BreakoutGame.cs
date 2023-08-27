@@ -41,7 +41,11 @@ namespace Breakout_game_Practice
             ballX = 2;          // Set ball horizontal speed
             ballY = 2;          // Set ball vertical speed
             playerSpeed = 12;   // Set player speed
+            isGameOver= false;
             txtScore.Text = "Score: " + score;
+
+            ball.Left = 300;    // Set ball horizontal starting position
+            ball.Top = 250;     // Set ball vertical starting position
 
             gameTimer.Start();  // Start game
 
@@ -101,6 +105,14 @@ namespace Breakout_game_Practice
 
                 // Call method to set game properties
                 setupGame();
+            }
+        }
+
+        private void removeBlock()
+        {
+            foreach(PictureBox block in blockArray)
+            {
+                this.Controls.Remove(block);
             }
         }
 
@@ -170,13 +182,13 @@ namespace Breakout_game_Practice
             // Check if the player finishes the game, then stop the game
             if (score == 28)
             {
-                gameOver("You win!!!");
+                gameOver("You win!!!   Press Enter to Play Again");
             }
 
             // Check if the player loses the game, then stop the game
             if (ball.Top > 400)
             {
-                gameOver("You lose!!!");
+                gameOver("You lose!!!   Press Enter to Try Again");
             }
         }
 
@@ -204,6 +216,13 @@ namespace Breakout_game_Practice
             if (e.KeyCode == Keys.Right)
             {
                 goRight = false;
+            }
+
+            // When the game is over, check if the player presses Enter then restart the game
+            if (e.KeyCode == Keys.Enter && isGameOver == true)
+            {
+                removeBlock();
+                placeBlocks();
             }
         }
     }
