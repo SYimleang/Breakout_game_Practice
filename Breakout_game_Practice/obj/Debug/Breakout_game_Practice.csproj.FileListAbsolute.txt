@@ -9,3 +9,14 @@ C:\Users\Frami\OneDrive - Seneca\Desktop\Breakout_game_Practice\Breakout_game_Pr
 C:\Users\Frami\OneDrive - Seneca\Desktop\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.exe
 C:\Users\Frami\OneDrive - Seneca\Desktop\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.pdb
 C:\Users\Frami\OneDrive - Seneca\Desktop\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.BreakoutGame.resources
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\bin\Debug\Breakout_game_Practice.exe.config
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\bin\Debug\Breakout_game_Practice.exe
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\bin\Debug\Breakout_game_Practice.pdb
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.csproj.AssemblyReference.cache
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.csproj.SuggestedBindingRedirects.cache
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.BreakoutGame.resources
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.Properties.Resources.resources
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.csproj.GenerateResource.cache
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.csproj.CoreCompileInputs.cache
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.exe
+C:\Users\Frami\Documents\frame\Repo\Breakout_game_Practice\Breakout_game_Practice\obj\Debug\Breakout_game_Practice.pdb

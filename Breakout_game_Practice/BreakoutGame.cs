@@ -12,14 +12,14 @@ namespace Breakout_game_Practice
 {
     public partial class BreakoutGame : Form
     {
-        bool goLeft;
-        bool goRight;
-        bool isGameOver;
+        bool goLeft;        // Left control boolean
+        bool goRight;       // Right control boolean
+        bool isGameOver;    // Stop game boolean
 
-        int score;
-        int ballx;
-        int bally;
-        int playerSpeed;
+        int score;          // Score of the player
+        int ballX;          // Ball horizontal speed
+        int ballY;          // Ball vertical speed
+        int playerSpeed;    // Player speed
 
         Random rnd = new Random();
 
@@ -30,31 +30,33 @@ namespace Breakout_game_Practice
             // Initialize all the components
             InitializeComponent();
 
-            // Call function to setup the game
-            setupGame();
+            // Call method to set blocks
+            placeBlocks();
         }
 
-        // Game setup before start the game
+        // Game setup method, to set game properties before starting the game
         private void setupGame()
         {
-            score = 0;          // Start score
-            ballx = 2;          // Ball horizontal spped
-            bally = 2;          // Ball vertical speed
-            playerSpeed = 12;   // Player speed
+            score = 0;          // Starting score
+            ballX = 2;          // Set ball horizontal speed
+            ballY = 2;          // Set ball vertical speed
+            playerSpeed = 12;   // Set player speed
             txtScore.Text = "Score: " + score;
 
-            gameTimer.Start();
+            gameTimer.Start();  // Start game
 
-            foreach (Control x in this.Controls)
+            foreach (Control block in this.Controls)
             {
-                // Check if blocks are exist.
-                if (x is PictureBox && (string)x.Tag == "blocks")
+                // Check if blocks exist
+                if (block is PictureBox && (string)block.Tag == "blocks")
                 {
-                    // Set color of the block
-                    x.BackColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
+                    // Set the color of the block
+                    block.BackColor = Color.FromArgb(rnd.Next(256), rnd.Next(256), rnd.Next(256));
                 }
             }
         }
+
+        // Game over method to stop the game
         private void gameOver(string message)
         {
             isGameOver = true;
@@ -63,13 +65,43 @@ namespace Breakout_game_Practice
             txtScore.Text = "Score: " + score + " " + message;
         }
 
+        // Generate blocks method
         private void placeBlocks()
         {
-            blockArray = new PictureBox[28];
+            blockArray = new PictureBox[28];    // Set number of blocks
 
-            int a = 0;
-            int top = 50;
-            int left = 100;
+            int a = 0;      // Number of blocks in each row
+            int top = 50;   // Set padding from the top
+            int left = 25;  // Set padding from the left
+
+            // Iteration to generate each block
+            for (int i = 0; i < blockArray.Length; i++)
+            {
+                blockArray[i] = new PictureBox();
+                blockArray[i].Height = 15;              // Set block height
+                blockArray[i].Width = 60;               // Set block width
+                blockArray[i].Tag = "blocks";           // Set block tag
+                blockArray[i].BackColor = Color.White;  // Set starting block color
+
+                // Set properties to make new rows of blocks
+                if (a == 7)
+                {
+                    top = top + 30;
+                    left = 25;
+                    a = 0;
+                }
+                if (a < 7)
+                {
+                    a++;
+                    blockArray[i].Left = left;
+                    blockArray[i].Top = top;
+                    this.Controls.Add(blockArray[i]);
+                    left = left + 80;
+                }
+
+                // Call method to set game properties
+                setupGame();
+            }
         }
 
 
@@ -91,76 +123,78 @@ namespace Breakout_game_Practice
             }
 
             // Ball move
-            ball.Left += ballx;
-            ball.Top += bally;
+            ball.Left += ballX;
+            ball.Top += ballY;
 
-            // Ball interact with edge
+            // The ball interacts with the edge
             if (ball.Left < 0 || ball.Left > 570)
             {
-                ballx = -ballx;
+                ballX = -ballX;
             }
             if (ball.Top < 0)
             {
-                bally = -bally;
+                ballY = -ballY;
             }
 
-            // Ball interact with player will random speed from 2 to 8 in both axes
+            // The ball interact with the player will random speed from 2 to 8 on both axes
             if (ball.Bounds.IntersectsWith(player.Bounds))
             {
-                bally = rnd.Next(2, 8) * -1;
+                ballY = rnd.Next(2, 8) * -1;
 
-                if (ballx < 0)
+                if (ballX < 0)
                 {
-                    ballx = rnd.Next(2, 8) * -1;
+                    ballX = rnd.Next(2, 8) * -1;
                 }
                 else
                 {
-                    ballx = rnd.Next(2, 8);
+                    ballX = rnd.Next(2, 8);
                 }
             }
 
-            foreach (Control x in this.Controls)
+            foreach (Control block in this.Controls)
             {
-                // Check if blocks are exist.
-                if (x is PictureBox && (string)x.Tag == "blocks")
+                // Check if blocks exist
+                if (block is PictureBox && (string)block.Tag == "blocks")
                 {
-                    if (ball.Bounds.IntersectsWith(x.Bounds))
+                    if (ball.Bounds.IntersectsWith(block.Bounds))
                     {
                         score += 1;
 
-                        bally = -bally;
+                        ballY = -ballY;
 
-                        this.Controls.Remove(x);
+                        this.Controls.Remove(block);
                     }
                 }
             }
 
+            // Check if the player finishes the game, then stop the game
             if (score == 28)
             {
                 gameOver("You win!!!");
             }
 
+            // Check if the player loses the game, then stop the game
             if (ball.Top > 400)
             {
                 gameOver("You lose!!!");
             }
         }
 
-        // Check if press buttons
+        // Check if the player pressing the button method
         private void keyisdown(object sender, KeyEventArgs e)
         {
-            if(e.KeyCode == Keys.Left)
+            if (e.KeyCode == Keys.Left)
             {
                 goLeft = true;
             }
-            if(e.KeyCode == Keys.Right)
+            if (e.KeyCode == Keys.Right)
             {
                 goRight = true;
             }
 
         }
 
-        // Check if release buttons
+        // Check if the player releasing buttons method
         private void keyisup(object sender, KeyEventArgs e)
         {
             if (e.KeyCode == Keys.Left)
@@ -171,11 +205,6 @@ namespace Breakout_game_Practice
             {
                 goRight = false;
             }
-        }
-
-        private void player_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }
