@@ -1,4 +1,4 @@
-# Breakout_game_Practice
+# Breakout Game
 Breakout game practice with C#
 
 ## Introduction
