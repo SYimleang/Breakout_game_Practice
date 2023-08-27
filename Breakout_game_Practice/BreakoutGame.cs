@@ -24,13 +24,18 @@ namespace Breakout_game_Practice
         Random rnd = new Random();
 
         PictureBox[] blockArray;
+        PictureBox ball;
+        PictureBox player;
 
+        // Main game!!!
         public BreakoutGame()
         {
             // Initialize all the components
             InitializeComponent();
 
-            // Call method to set blocks
+            // Call method to set blocks, ball and player
+            placeBall();
+            placePlayer();
             placeBlocks();
         }
 
@@ -38,8 +43,8 @@ namespace Breakout_game_Practice
         private void setupGame()
         {
             score = 0;          // Starting score
-            ballX = 2;          // Set ball horizontal speed
-            ballY = 2;          // Set ball vertical speed
+            ballX = 3;          // Set ball horizontal speed
+            ballY = 3;          // Set ball vertical speed
             playerSpeed = 12;   // Set player speed
             isGameOver= false;
             txtScore.Text = "Score: " + score;
@@ -108,6 +113,31 @@ namespace Breakout_game_Practice
             }
         }
 
+        // Generate ball method
+        private void placeBall()
+        {
+            ball = new PictureBox();
+            ball.Height = 20;
+            ball.Width = 20;
+            ball.BackColor = Color.Yellow;
+            ball.Left = rnd.Next(150, 400);
+            ball.Top = 250;
+            this.Controls.Add(ball);
+        }
+
+        // Generate player method
+        private void placePlayer()
+        {
+            player = new PictureBox();
+            player.Height = 16;
+            player.Width = 100;
+            player.BackColor = Color.White;
+            player.Left = 250;
+            player.Top = 345;
+            this.Controls.Add(player);
+        }
+
+        // Remove all blocks method
         private void removeBlock()
         {
             foreach(PictureBox block in blockArray)
@@ -116,6 +146,17 @@ namespace Breakout_game_Practice
             }
         }
 
+        // Remove ball method
+        private void removeBall()
+        {
+            this.Controls.Remove(ball);
+        }
+
+        // Remove player method
+        private void removePlayer()
+        {
+            this.Controls.Remove(player);
+        }
 
         // Playing game events
         private void mainGameTimerEvent(object sender, EventArgs e)
@@ -129,7 +170,7 @@ namespace Breakout_game_Practice
             }
 
             // Player right move
-            if (goRight == true && player.Left < 510)
+            if (goRight == true && player.Left < 480)
             {
                 player.Left += playerSpeed;
             }
@@ -151,15 +192,15 @@ namespace Breakout_game_Practice
             // The ball interact with the player will random speed from 2 to 8 on both axes
             if (ball.Bounds.IntersectsWith(player.Bounds))
             {
-                ballY = rnd.Next(2, 8) * -1;
+                ballY = rnd.Next(3, 8) * -1;
 
                 if (ballX < 0)
                 {
-                    ballX = rnd.Next(2, 8) * -1;
+                    ballX = rnd.Next(3, 8) * -1;
                 }
                 else
                 {
-                    ballX = rnd.Next(2, 8);
+                    ballX = rnd.Next(3, 8);
                 }
             }
 
@@ -222,7 +263,11 @@ namespace Breakout_game_Practice
             if (e.KeyCode == Keys.Enter && isGameOver == true)
             {
                 removeBlock();
+                removeBall();
+                removePlayer();
                 placeBlocks();
+                placeBall();
+                placePlayer();
             }
         }
     }
